@@ -16,19 +16,23 @@ import {
  *
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
-export const mysqlTable = mysqlTableCreator((name) => `t3_url_shortener_${name}`);
+
+export const mysqlTable = mysqlTableCreator(
+  (name) => `t3_url_shortener_${name}`,
+);
 
 export const posts = mysqlTable(
-  "post",
+  "urls",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
-    name: varchar("name", { length: 256 }),
+    longUrl: varchar("long_url", { length: 256 }),
+    shortUrl: varchar("sort_url", { length: 256 }),
     createdAt: timestamp("created_at")
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     updatedAt: timestamp("updatedAt").onUpdateNow(),
   },
   (example) => ({
-    nameIndex: index("name_idx").on(example.name),
-  })
+    longUrlIndex: index("long_url_idx").on(example.longUrl),
+  }),
 );
