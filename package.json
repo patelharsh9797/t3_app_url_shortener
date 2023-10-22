@@ -4,13 +4,14 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "db:push": "dotenv drizzle-kit push:mysql",
+    "db:push": "dotenv drizzle-kit push:pg",
     "db:studio": "dotenv drizzle-kit studio",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.6.0",
     "@planetscale/database": "^1.11.0",
     "@t3-oss/env-nextjs": "^0.7.0",
     "@tanstack/react-query": "^4.32.6",
@@ -19,10 +20,14 @@
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
     "drizzle-orm": "^0.28.5",
+    "net": "^1.0.2",
     "next": "^13.5.4",
+    "pg": "^8.11.3",
+    "postgres": "^3.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "superjson": "^1.13.1",
+    "tls": "^0.0.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
