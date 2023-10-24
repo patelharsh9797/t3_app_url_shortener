@@ -19,12 +19,12 @@ const formSchema = z.object({
 });
 
 export default function URLForm() {
-  const form = useForm({
+  const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = async (data: any) => {
-    console.log(data);
+  const onSubmit = ({ longUrl }: z.infer<typeof formSchema>) => {
+    console.log(longUrl);
   };
 
   return (
