@@ -13,18 +13,32 @@ import {
   FormMessage,
 } from "~/components/ui/form";
 import { Input } from "~/components/ui/input";
+import { api } from "~/trpc/react";
 
 const formSchema = z.object({
-  longUrl: z.string().url(),
+  longUrl: z.string().url({
+    message: "Must be a valid URL Bro!!!",
+  }),
 });
 
 export default function URLForm() {
+  const { mutate: createShortUrl, isLoading } =
+    api.url.createShortUrl.useMutation();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
   });
 
-  const onSubmit = ({ longUrl }: z.infer<typeof formSchema>) => {
-    console.log(longUrl);
+  const onSubmit = async ({ longUrl }: z.infer<typeof formSchema>) => {
+    await createShortUrl(
+      { longUrl },
+      {
+        onSuccess: (data) => {
+          alert(data?.shortUrl);
+          form.reset({ longUrl: "" });
+        },
+      },
+    );
   };
 
   return (
@@ -37,7 +51,7 @@ export default function URLForm() {
           control={form.control}
           name="longUrl"
           render={({ field }) => (
-            <FormItem className="w-1/2">
+            <FormItem className="w-full lg:w-1/2">
               <FormControl>
                 <Input
                   className="w-full flex-1"
@@ -50,7 +64,9 @@ export default function URLForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">ShortMe Bruhh!</Button>
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? "Shorting......" : "ShortMe Bruhh!"}
+        </Button>
       </form>
     </Form>
   );
