@@ -5,9 +5,9 @@ import { buttonVariants } from "./ui/button";
 
 export default function Navbar() {
   return (
-    <header className="container sticky inset-0 py-4">
-      <nav className="bg-secondary flex items-center justify-between gap-4 rounded-xl bg-opacity-5 p-4 backdrop-blur-md">
-        <Link href={"/"} className="text-primary text-xl font-semibold italic">
+    <header className="container sticky inset-0 z-10 py-4">
+      <nav className="flex items-center justify-between gap-4 rounded-xl bg-secondary bg-opacity-5 p-4 backdrop-blur-md">
+        <Link href={"/"} className="text-xl font-semibold italic text-primary">
           ShortMe
         </Link>
         <ul className="flex items-center gap-4">

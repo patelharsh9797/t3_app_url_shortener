@@ -1,6 +1,8 @@
 import URLForm from "~/components/url-form";
+import { api } from "~/trpc/server";
 
-export default function Home() {
+export default async function Home() {
+  const data = await api.url.getAllUrls.query();
   return (
     <section className="flex min-h-screen flex-col gap-8 text-center">
       <div className="mt-8">
@@ -50,6 +52,13 @@ export default function Home() {
             className="relative left-[calc(50%-13rem)] aspect-[1155/678] w-[36.125rem] translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-36rem)] sm:w-[72.1875rem]"
           />
         </div>
+      </div>
+
+      <div>
+        Data Here:
+        {data.map((d, i) => (
+          <div key={i}>{d.shortUrl}</div>
+        ))}
       </div>
     </section>
   );
