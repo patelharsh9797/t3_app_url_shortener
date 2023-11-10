@@ -3,6 +3,7 @@ import { nanoid } from "nanoid";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { urls } from "~/server/db/schema";
+import { desc } from "drizzle-orm";
 
 export const urlRouter = createTRPCRouter({
   createShortUrl: publicProcedure
@@ -16,6 +17,6 @@ export const urlRouter = createTRPCRouter({
       )[0];
     }),
   getAllUrls: publicProcedure.query(({ ctx: { db } }) => {
-    return db.select().from(urls);
+    return db.select().from(urls).orderBy(desc(urls.createdAt)).limit(5);
   }),
 });

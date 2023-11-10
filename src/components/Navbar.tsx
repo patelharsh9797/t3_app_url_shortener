@@ -19,8 +19,8 @@ export default function Navbar() {
               href={"https://github.com/patelharsh9797/t3_app_url_shortener"}
               target="_blank"
               className={buttonVariants({
-                size: "sm",
-                className: "ring-1 ring-zinc-400 hover:opacity-80",
+                className: "rounded-full hover:opacity-80",
+                size: "icon",
               })}
             >
               <Github />

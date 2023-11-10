@@ -1,8 +1,10 @@
+import RecentShortUrls from "~/components/RecentShortUrls";
 import URLForm from "~/components/url-form";
 import { api } from "~/trpc/server";
 
 export default async function Home() {
   const data = await api.url.getAllUrls.query();
+
   return (
     <section className="flex min-h-screen flex-col gap-8 text-center">
       <div className="mt-8">
@@ -54,12 +56,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <div>
-        Data Here:
-        {data.map((d, i) => (
-          <div key={i}>{d.shortUrl}</div>
-        ))}
-      </div>
+      {data && data.length > 0 && <RecentShortUrls initialUrls={data} />}
     </section>
   );
 }
