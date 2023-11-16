@@ -1,12 +1,11 @@
 "use client";
 import Link from "next/link";
 import { api } from "~/trpc/react";
-import { RouterOutputs } from "~/trpc/shared";
+import type { RouterOutputs } from "~/trpc/shared";
 import { buttonVariants } from "./ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -25,7 +24,7 @@ export default function RecentShortUrls({ initialUrls }: RecentShortUrlsProps) {
 
   return (
     <div className="space-y-4">
-      <h4 className="text-2xl font-semibold">Most Recent Shorty's :</h4>
+      <h4 className="text-2xl font-semibold">{`Most Recent Shorty's :`}</h4>
 
       <div className="mx-auto w-full md:w-1/2">
         <div className="rounded-md border">

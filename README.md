@@ -26,3 +26,8 @@ You can check out the [create-t3-app GitHub repository](https://github.com/t3-os
 ## How do I deploy this?
 
 Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+
+<!-- TODO -->
+
+- [x] Create a function to map over each link to get short link with baseURL from backend.
+- [ ] Display box update after the create url is called. (Maybe Loading Ui there.)

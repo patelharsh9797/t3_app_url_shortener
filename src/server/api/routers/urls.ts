@@ -1,9 +1,14 @@
+import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { z } from "zod";
 import { nanoid } from "nanoid";
-
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { urls } from "~/server/db/schema";
 import { desc } from "drizzle-orm";
+import { env } from "~/env.mjs";
+
+// const getShortLink = (url) => ({
+// ...url,
+
+// })
 
 export const urlRouter = createTRPCRouter({
   createShortUrl: publicProcedure
@@ -16,7 +21,9 @@ export const urlRouter = createTRPCRouter({
           .returning()
       )[0];
     }),
-  getAllUrls: publicProcedure.query(({ ctx: { db } }) => {
-    return db.select().from(urls).orderBy(desc(urls.createdAt)).limit(5);
+  getAllUrls: publicProcedure.query(async ({ ctx: { db } }) => {
+    return (
+      await db.select().from(urls).orderBy(desc(urls.createdAt)).limit(5)
+    ).map((url) => ({ ...url, shortUrl: `${env.BASE_URI}/${url.shortUrl}` }));
   }),
 });
