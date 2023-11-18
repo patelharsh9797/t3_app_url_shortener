@@ -64,5 +64,8 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.22.0"
-  }
+  },
+  "eslintIgnore": [
+    "table.tsx"
+  ]
 }
