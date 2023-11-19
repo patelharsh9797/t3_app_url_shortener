@@ -2,7 +2,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 import { z } from "zod";
 import { nanoid } from "nanoid";
 import { urls } from "~/server/db/schema";
-import { desc, InferSelectModel } from "drizzle-orm";
+import { desc, eq, InferSelectModel } from "drizzle-orm";
 import { getBaseUrl } from "~/trpc/shared";
 
 type URLType = InferSelectModel<typeof urls>;
@@ -28,4 +28,9 @@ export const urlRouter = createTRPCRouter({
       await db.select().from(urls).orderBy(desc(urls.createdAt)).limit(5)
     ).map(filterShortLinks);
   }),
+  getShortLinkInfo: publicProcedure
+    .input(z.object({ slug: z.string() }))
+    .query(async ({ ctx: { db }, input: { slug } }) => {
+      return (await db.select().from(urls).where(eq(urls.shortUrl, slug)))[0];
+    }),
 });

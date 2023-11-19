@@ -41,7 +41,8 @@ export default function RecentShortUrls({ initialUrls }: RecentShortUrlsProps) {
                   <TableCell className="p-2">{index + 1}</TableCell>
                   <TableCell className="p-2">
                     <Link
-                      href={"/"}
+                      href={url.shortUrl}
+                      target="_blank"
                       className={buttonVariants({
                         variant: "link",
                         size: "sm",
@@ -57,7 +58,7 @@ export default function RecentShortUrls({ initialUrls }: RecentShortUrlsProps) {
         </div>
       </div>
 
-      <div className="flex flex-col"></div>
+      <div className="py-4" />
     </div>
   );
 }
