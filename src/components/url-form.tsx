@@ -51,9 +51,9 @@ export default function URLForm() {
           });
           form.reset({ longUrl: "" });
           // void ctx.url.getAllUrls.invalidate();
-          void ctx.url.getAllUrls.invalidate();
+          // void ctx.url.getAllUrls.invalidate();
           // revalidatePath("/");
-          // router.refresh();
+          router.refresh();
         },
         onError: (error) => {
           console.log("error", error);
