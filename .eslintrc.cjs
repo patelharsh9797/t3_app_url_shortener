@@ -4,7 +4,7 @@ const config = {
   parserOptions: {
     project: true,
   },
-  ignorePatterns: ["table.tsx"],
+  ignorePatterns: ["table.tsx", "server.ts"],
   plugins: ["@typescript-eslint"],
   extends: [
     "next/core-web-vitals",
